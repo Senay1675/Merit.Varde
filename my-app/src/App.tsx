@@ -1,15 +1,20 @@
 import { useState } from 'react'
+import Header from './Components/Header/Header'
 
 import './App.css'
+import Footer from './Components/Footer'
+import Counter from './Components/Counter/Counter'
 
 function App() {
 
 
   return (
     <>
-    <div>
-      
-    </div>
+    
+    
+    <Header/>
+    <Counter/>
+    <Footer/>
 
     </>
       

@@ -1,24 +1,35 @@
+
+
+// export default Counter;
 import React, { useState } from 'react';
 
-const Counter = () => {
-  const [course, setCourse] = useState('');
-  const [point, setPoint] = useState('');
-  const [grade, setGrade] = useState('');
-  const [courses, setCourses] = useState([]); // State för lagrade kurser
+// Definiera en typ för kurser
+interface Course {
+  id: number;
+  course: string;
+  point: number;
+  grade: string;
+}
 
-  // Hantera lägg till kurs
+const Counter: React.FC = () => {
+  const [course, setCourse] = useState<string>('');
+  const [point, setPoint] = useState<string>('');
+  const [grade, setGrade] = useState<string>('');
+  const [courses, setCourses] = useState<Course[]>([]);
+
+  // Lägg till en ny kurs
   const handleAddCourse = () => {
     if (course && point && grade) {
-      const newCourse = {
+      const newCourse: Course = {
+        id: Date.now(),
         course,
         point: parseInt(point, 10),
         grade,
       };
 
-      // Uppdatera listan med den nya kursen
       setCourses((prevCourses) => [...prevCourses, newCourse]);
 
-      // Töm fälten efter tillägg
+      // Nollställ input-fälten
       setCourse('');
       setPoint('');
       setGrade('');
@@ -27,61 +38,66 @@ const Counter = () => {
     }
   };
 
-  return (
-    <>
-      <div>
-        <h2>Counter</h2>
-        <div>
-          <h3>Lägg till ny kurs</h3>
-          <label htmlFor="course">Kurs</label>
-          <input
-            type="text"
-            id="course"
-            value={course}
-            onChange={(e) => setCourse(e.target.value)}
-          />
-          <label htmlFor="point">Poäng</label>
-          <input
-            type="number"
-            id="point"
-            value={point}
-            onChange={(e) => setPoint(e.target.value)}
-          />
-          <div>
-            <label>Betyg:</label>
-            {['A', 'B', 'C', 'D', 'E', 'F'].map((gradeOption) => (
-              <button
-                key={gradeOption}
-                style={{
-                  backgroundColor: grade === gradeOption ? 'lightblue' : '',
-                }}
-                onClick={() => setGrade(gradeOption)}
-              >
-                {gradeOption}
-              </button>
-            ))}
-          </div>
-          <button onClick={handleAddCourse}>Lägg till kurs</button>
-        </div>
+  // Funktion för att radera en kurs
+  const deleteCourse = (id: number) => {
+    setCourses((prevCourses) => prevCourses.filter((item) => item.id !== id));
+  };
 
-        {/* Lista över kurser */}
+  return (
+    <div>
+      <h2>Counter</h2>
+      <div>
+        <h3>Lägg till ny kurs</h3>
+        <label htmlFor="course">Kurs</label>
+        <input
+          type="text"
+          id="course"
+          value={course}
+          onChange={(e) => setCourse(e.target.value)}
+        />
+        <label htmlFor="point">Poäng</label>
+        <input
+          type="number"
+          id="point"
+          value={point}
+          onChange={(e) => setPoint(e.target.value)}
+        />
         <div>
-          <h3>Dina kurser</h3>
-          {courses.length === 0 ? (
-            <p>Inga kurser tillagda ännu.</p>
-          ) : (
-            <ul>
-              {courses.map((item, index) => (
-                <li key={index}>
-                  <strong>{item.course}</strong> - {item.point} poäng - Betyg: {item.grade}
-                </li>
-              ))}
-            </ul>
-          )}
+          <label>Betyg:</label>
+          {['A', 'B', 'C', 'D', 'E', 'F'].map((gradeOption) => (
+            <button
+              key={gradeOption}
+              style={{
+                backgroundColor: grade === gradeOption ? 'lightblue' : '',
+              }}
+              onClick={() => setGrade(gradeOption)}
+            >
+              {gradeOption}
+            </button>
+          ))}
         </div>
+        <button onClick={handleAddCourse}>Lägg till kurs</button>
       </div>
-    </>
+
+      {/* Lista över kurser */}
+      <div>
+        <h3>Dina kurser</h3>
+        {courses.length === 0 ? (
+          <p>Inga kurser tillagda ännu.</p>
+        ) : (
+          <ul>
+            {courses.map((item) => (
+              <li key={item.id}>
+                <strong>{item.course}</strong> - {item.point} poäng - Betyg: {item.grade}
+                <button onClick={() => deleteCourse(item.id)}>❌</button>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+    </div>
   );
 };
 
 export default Counter;
+

@@ -1,9 +1,10 @@
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  max-width: 100%;
+  width: 100%;
+  /* padding: 2rem; Valfritt, beroende på om du vill ha padding */
+  text-align: center; /* Behåll detta om du vill centrera texten */
 }
+
 
 .logo {
   height: 6em;

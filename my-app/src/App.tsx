@@ -2,8 +2,9 @@ import { useState } from 'react'
 import Header from './Components/Header/Header'
 
 import './App.css'
-import Footer from './Components/Footer'
+import Footer from './Components/Footer/Footer'
 import Counter from './Components/Counter/Counter'
+
 
 function App() {
 

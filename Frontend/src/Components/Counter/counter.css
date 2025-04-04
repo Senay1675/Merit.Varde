@@ -57,7 +57,8 @@ input {
   
 }
 .selected{
-  background-color: darkgreen;
+  background-color:  #003d42;
+  border: yellow;
 }
 
 .grade-btn {
@@ -104,7 +105,7 @@ input {
 }
 
 .delete-btn {
-  background-color: red;
+  background-color: white;
   color: white;
   border: none;
   padding: 5px 10px;

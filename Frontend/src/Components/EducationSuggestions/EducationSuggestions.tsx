@@ -1,16 +1,24 @@
 import React from "react";
 import "./EducationSuggestions.css";
 
+
+// EducationSuggestion tar emot ett meritvärde (meritValue) och en lista av utbildningsförslag (suggestions).
+// Den filtrerar sedan ut utbildningar som matchar meritvärdet och visar dem i en lista.
+
 interface Education {
   namn: string;
   beskrivning: string;
   minMerit: number;
 }
 
+// Definierar props för EducationSuggestion-komponenten
+
 interface EducationSuggestionProps {
   meritValue: number | null;
   suggestions: Education[];
 }
+
+// Funktion för att bestämma meritspann baserat på användarens meritvärde
 
 const getMeritRange = (meritValue: number | null): [number, number] => {
   if (meritValue === null) return [0, 10];
@@ -26,6 +34,8 @@ const getMeritRange = (meritValue: number | null): [number, number] => {
 const EducationSuggestion: React.FC<EducationSuggestionProps> = ({ meritValue, suggestions }) => {
   if (meritValue === null) return <p>Beräkna ditt meritvärde först.</p>;
 
+    // Hämtar det meritintervall som användarens meritvärde tillhör
+
   const [minMerit, maxMerit] = getMeritRange(meritValue);
 
   // Filtrera utbildningar
@@ -36,6 +46,7 @@ const EducationSuggestion: React.FC<EducationSuggestionProps> = ({ meritValue, s
   return (
     <div className="education-suggestions">
       <h3>Utbildningsförslag</h3>
+      <p>baserat på ditt meritvärde.</p>
       {filteredSuggestions.length > 0 ? (
         <ul>
           {filteredSuggestions.map((utb, index) => (

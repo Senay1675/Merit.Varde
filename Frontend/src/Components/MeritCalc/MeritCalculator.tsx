@@ -78,7 +78,7 @@ const MeritCalculator: React.FC<MeritCalculatorProps> = ({ courses, setMeritValu
             {/* Knapp för att starta beräkning av meritvärde */}
 
       <button className="beraknaBtn" onClick={handleCalculate} disabled={loading}>{loading ? "Laddar..." : "Beräkna meritvärde"}</button>
-      <h3>{localMeritValue !== null ? `Ditt meritvärde: ${localMeritValue.toFixed(2)}` : "Ingen beräkning ännu"}</h3>
+      <h3>{localMeritValue !== null ? `Ditt meritvärde: ${localMeritValue.toFixed(2)}` : ""}</h3>
     </div>
   );
 };

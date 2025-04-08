@@ -1,4 +1,4 @@
-import React from 'react'
+
 import "./header.css";
 
 export default function Header() {
@@ -6,7 +6,7 @@ export default function Header() {
     <>
     <div className = "header">
         <div>
-        <img src="/public/Studeravidare.logo.liten.png" alt="logo" />
+        <img src="/Merit.Varde/Studeravidare.logo.liten.png" alt="logo" />
 
         </div>
         <div>
